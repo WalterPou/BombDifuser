@@ -29,11 +29,18 @@ def Defused():
     print(message)
     engine.say(message)
     engine.runAndWait()
-    Play = int(input('Do you want to play again? 0/1: '))
-    if Play == 1:
-        random.shuffle(Code)
-        #print(Code)
-        main()
+    play = 'Do you want to play again? Press pin 8 to play again..'
+    print(play)
+    engine.say(play)
+    engine.runAndWait()
+    while True:
+        if pin_8.read() == 1:
+            random.shuffle(Code)
+            #print(Code)
+            winsound.Beep(1200, 150)
+            winsound.Beep(1200, 150)
+            break
+    main()
 
 def Explode():
     winsound.Beep(1200, 150)
@@ -43,13 +50,22 @@ def Explode():
     print(message)
     engine.say(message)
     engine.runAndWait()
-    Play = int(input('Do you want to play again? 0/1: '))
-    if Play == 1:
-        random.shuffle(Code)
-        #print(Code)
-        main()
+    play = 'Do you want to play again? Press pin 8 to play again..'
+    print(play)
+    engine.say(play)
+    engine.runAndWait()
+    while True:
+        if pin_8.read() == 1:
+            random.shuffle(Code)
+            #print(Code)
+            winsound.Beep(1200, 150)
+            winsound.Beep(1200, 150)
+            break
+    main()
 
 def main():
+    engine.say('Bomb has been planted.')
+    engine.runAndWait()
     attempts = 0
     max_attempts = 5
     while True:
@@ -65,18 +81,24 @@ def main():
                     user_input.append(3)
                     print(user_input)
                     winsound.Beep(750, 150)
+                    engine.say('3')
+                    engine.runAndWait()
                     pin_9_state = True
             if pin_8_state == False:
                 if pin_8.read() == 1:
                     user_input.append(2)
                     print(user_input)
                     winsound.Beep(750, 150)
+                    engine.say('2')
+                    engine.runAndWait()
                     pin_8_state = True
             if pin_7_state == False:
                 if pin_7.read() == 1:
                     user_input.append(1)
                     print(user_input)
                     winsound.Beep(750, 150)
+                    engine.say('1')
+                    engine.runAndWait()
                     pin_7_state = True
             if len(user_input) == 3:
                 if user_input == Code:
@@ -90,10 +112,18 @@ def main():
                     print(f"Incorrect code. You have {max_attempts - attempts} attempts left.")
                     winsound.Beep(1200, 150)
                     winsound.Beep(1200, 150)
+                    engine.say('Invalid Code!')
+                    engine.runAndWait()
                     state = False
 
         if attempts == max_attempts:
             Explode()
 
 if __name__ == "__main__":
-    main()
+    engine.say('Press the middle pin to start')
+    engine.runAndWait()
+    while True:
+        if pin_8.read() == 1:
+            winsound.Beep(1200, 150)
+            winsound.Beep(1200, 150)
+            main()
