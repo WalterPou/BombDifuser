@@ -122,7 +122,7 @@ def main():
     thread = threading.Thread(target=Beep)
     thread.start()
     attempts = 0
-    max_attempts = 5
+    max_attempts = 8
     #print(Code)
     engine.setProperty('rate',300)
     while True:
@@ -137,25 +137,25 @@ def main():
                 if pin_9.read() == 1:
                     user_input.append(3)
                     print(user_input)
-                    winsound.Beep(750, 150)
-                    engine.say('3')
-                    engine.runAndWait()
+                    winsound.Beep(1250, 150)
+                    #engine.say('3')
+                    #engine.runAndWait()
                     pin_9_state = True
             if pin_8_state == False:
                 if pin_8.read() == 1:
                     user_input.append(2)
                     print(user_input)
-                    winsound.Beep(750, 150)
-                    engine.say('2')
-                    engine.runAndWait()
+                    winsound.Beep(1000, 150)
+                    #engine.say('2')
+                    #engine.runAndWait()
                     pin_8_state = True
             if pin_7_state == False:
                 if pin_7.read() == 1:
                     user_input.append(1)
                     print(user_input)
                     winsound.Beep(750, 150)
-                    engine.say('1')
-                    engine.runAndWait()
+                    #engine.say('1')
+                    #engine.runAndWait()
                     pin_7_state = True
             if len(user_input) == len(Code):
                 if user_input == Code:
@@ -165,7 +165,7 @@ def main():
                     state = False
                     time.sleep(1.5)
                     engine.setProperty('rate',150)
-                    engine.say('Remember the patterns.')
+                    engine.say('Section One passed. Finished the next sequence, remember the patterns.')
                     engine.runAndWait()
                     Sequence2()
                 else:
@@ -174,8 +174,8 @@ def main():
                     print(f"Incorrect code. You have {max_attempts - attempts} attempts left.")
                     winsound.Beep(1200, 150)
                     winsound.Beep(1200, 150)
-                    engine.say(f'Invalid Code! {max_attempts- attempts} left.')
-                    engine.runAndWait()
+                    #engine.say(f'Invalid Code! {max_attempts- attempts} left.')
+                    #engine.runAndWait()
                     engine.setProperty('rate',300)
                     break
 
